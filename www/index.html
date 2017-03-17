@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+        <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *; script-src 'self' http://cdn.jsdelivr.net/vue/1.0.16/vue.js 'unsafe-eval'" />
+
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <title>Rater</title>
+    </head>
+
+    <body>
+        <section class="itemapp">
+            <h1>Rate your products</h1>
+            <header class="header">
+                <input type="text" class="new-item input-50-col"
+                       v-model="newItem"
+                       autocomplete="off"
+                       placeholder="Item/Product">
+
+                <input type="number" class="new-item-price input-50-col"
+                       v-model="newItemPrice"
+                       autocomplete="off"
+                       placeholder="Price">
+
+                <input type="number" class="new-item-amount input-50-col"
+                       autocomplete="off"
+                       placeholder="Amount"
+                       v-model="newItemAmount">
+
+                <span class="subtotal">Subtotal: {{itemAmountSubtotal}}</span>
+
+                <button class="btnAddItem" @click="addItem">Add</button>
+            </header>
+
+            <section class="main" v-show="items.length" v-cloak>
+                <ul class="item-list">
+                    <li v-for="item in items"
+                        class="item"
+                        :key="item.id">
+
+                        <div class="view">
+                            <label>{{ item.title }}  x{{item.amount}} <span class="item-price">${{item.subtotal}}</span></label>
+                            <button class="destroy" @click="removeItem(item)"></button>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+            <footer class="footer" v-show="items.length" v-cloak>
+                <span class="total-price item-price">
+                    TOTAL ${{ totalPrice }}
+                </span>
+
+            </footer>
+        </section>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/vue.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+    </body>
+</html>
